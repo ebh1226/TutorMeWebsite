@@ -1,0 +1,11 @@
+{% block content %}
+    <h2>Tutoree Dashboard</h2>
+    <h3>Available Tutors:</h3>
+    <ul>
+        {% for tutor in matched_tutors %}
+            <li>Username: {{ tutor.username }}</li>
+        {% empty %}
+            <li>No tutors available</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

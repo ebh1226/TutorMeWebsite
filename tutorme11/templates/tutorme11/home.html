@@ -1,0 +1,66 @@
+{% load account %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+        background-color: #b8d6e0;
+        font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+    }
+    h1 {
+        font-weight: bolder;
+        text-align: center;
+        font-size: 50px;
+        margin-top: 150px;
+    }
+    p {
+        text-align: center;
+        font-size: 18px;
+        margin-top: 60px;
+    }
+    a {
+        display: block;
+        text-align: center;
+        margin: 20px auto 0;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #4285F4;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 160px;
+    }
+    a:hover {
+        background-color: #2a75f3;
+    }
+    button {
+        background-color: #4285F4;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #2a75f3;
+    }
+</style>
+
+
+
+</head>
+<body>
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Successfully Logged In</h1>
+    <a href="{% url 'loggedInHomePage' %}"><button>Continue to Homepage</button></a>
+{% else %}
+    <h1>Hoos Tutoring</h1>
+    <p>Please login to your account</p>
+    <a href="{% provider_login_url 'google'%}?next=/">Login with Google</a>
+{% endif %}
+{% endblock %}
+</body>
+</html>

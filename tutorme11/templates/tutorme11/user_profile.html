@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+{% load bootstrap5 %}
+<html>
+
+<head>
+    <title>User Profile</title>
+</head>
+
+<head>
+    <style>
+        body {
+            background-color: #b8d6e0; /* #ADD8E6 or #cceefd light blue */
+        }
+
+        nav {
+            font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+            
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #2E3D51;
+            height: 80px; /* set the height of the navigation bar */
+            display: flex; /* use flexbox to center the text */
+            justify-content: center; /* horizontally center the text */
+        }
+
+        nav li {
+            float: left; 
+        }
+
+        nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            text-decoration: none;
+            font-size: 20px;
+            line-height: 10px;
+        }
+
+        nav li a:hover {
+            background-color: #111;
+        }
+        
+        @media screen and (max-width: 600px) {
+            nav li a {
+                padding: 20px 8px;
+            }
+        }
+
+        /*
+        nav {
+            width: 100%;
+        }
+        */
+
+         h1 {
+            font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+            font-weight: bolder;
+            text-align: center;
+            font-size: 60px;
+        }
+
+        
+        
+/*
+        .logo {
+
+            display: inline-block;
+        }
+        
+        .logo img {
+          max-width: 10%;
+          margin: 0 auto;
+          display: inline-block;
+        }
+
+        
+        .account-info {
+            background-color: #5d95a7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .account-title {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .account-info2 {
+            font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+           
+        }
+
+        
+        logo info
+              <div class="container">
+            <div class="logo">
+                
+            </div>
+        </div>
+*/
+
+   
+        /* Style for even rows */
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Style for odd rows */
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        /* Style for header row */
+        th {
+            background-color: #2E3D51;
+            color: white;
+        }
+
+        /* Style for table cells */
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        
+        button[type="submit"] {
+            background-color: #2E3D51;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #111;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        .profile-info {
+            background-color: #5d95a7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .profile-title {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .profile-value {
+            font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+            margin-left: 10px;
+        }
+
+        h3 {
+            margin-top: 60px;
+        }
+
+        
+
+    </style>
+
+    <title>User Profile Page</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'index' %}">Search For Classes</a></li>
+            <li><a href="{% url 'view_requests' %}">View Requests</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            
+        </ul>
+    </nav>
+    
+
+
+    <h1>Partner Profile Page</h1>
+
+
+    
+    <ul>
+        <li><span class="profile-title">Username:</span> <span class="profile-value">{{user.username}}</span></li>
+        <li><span class="profile-title">Name:</span> <span class="profile-value">{{user.name}}</span></li>
+        <li><span class="profile-title">Email Address:</span> <span class="profile-value">{{email}}</span></li>
+        {% if user.is_student %}
+        <li><span class="profile-title">Role:</span> <span class="profile-value">Student</span></li>
+        {% else %}
+        <li><span class="profile-title">Role:</span> <span class="profile-value">Tutor</span></li>
+        <li><span class="profile-title">Hourly Rate:</span> <span class="profile-value">${{user.rate}}</span></li>
+        <li><span class="profile-title">Start Time:</span> <span class="profile-value">{{user.start_time}}</span></li>
+        <li><span class="profile-title">End Time:</span> <span class="profile-value">{{user.end_time}}</span></li>
+            {% if not request.user.is_student %}
+                <form action="{% url 'pay_now' user.username %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Pay Now</button>
+                </form>
+                <div class="my-message">
+                    <p>You can hire this tutor. Please click the "Pay Now" button to proceed to their Venmo.</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </ul>
+
+    
+
+
+    <h3>Classes:</h3>
+<ul>
+  {% for class in user.enrolled_classes.all %} 
+  <li>{{class.subject}} {{class.catalog_nbr}} {{class.descr}}</li>
+  {% endfor %}
+</ul>
+
+{% if is_student and not user.is_student %} 
+<h3>Add Session Request:</h3>
+<p>Add the time that you desire for your tutoring session:</p>
+<form action="{% url 'add_request' request.user.username user.username %}" method="post">
+  {% csrf_token %}
+  {% bootstrap_form form %} 
+  <button type="submit">Send Request</button>
+</form>
+{% endif %}
+
+
+
+</body>
+</html>

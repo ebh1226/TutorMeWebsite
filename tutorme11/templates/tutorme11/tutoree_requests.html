@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tutoree Requests</title>
+</head>
+
+<head>
+    <style>
+        body {
+            background-color: #b8d6e0; /* #ADD8E6 or #cceefd light blue */
+        }
+
+        nav {
+            font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+            
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #2E3D51;
+            height: 80px; /* set the height of the navigation bar */
+            display: flex; /* use flexbox to center the text */
+            justify-content: center; /* horizontally center the text */
+        }
+
+        nav li {
+            float: left; 
+        }
+
+        nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            text-decoration: none;
+            font-size: 20px;
+            line-height: 10px;
+        }
+
+        nav li a:hover {
+            background-color: #111;
+        }
+        
+        @media screen and (max-width: 600px) {
+            nav li a {
+                padding: 20px 8px;
+            }
+        }
+
+        /*
+        nav {
+            width: 100%;
+        }
+        */
+
+         h1 {
+            font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+            font-weight: bolder;
+            text-align: center;
+            font-size: 60px;
+        }
+
+        
+        
+/*
+        .logo {
+
+            display: inline-block;
+        }
+        
+        .logo img {
+          max-width: 10%;
+          margin: 0 auto;
+          display: inline-block;
+        }
+
+        
+        .account-info {
+            background-color: #5d95a7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .account-title {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .account-info2 {
+            font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+           
+        }
+
+        
+        logo info
+              <div class="container">
+            <div class="logo">
+                
+            </div>
+        </div>
+*/
+
+   
+        /* Style for even rows */
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Style for odd rows */
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        /* Style for header row */
+        th {
+            background-color: #2E3D51;
+            color: white;
+        }
+
+        /* Style for table cells */
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    
+        
+
+    </style>
+
+    <title>TutorMe Request Page</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'index' %}">Search For Classes</a></li>
+            <li><a href="{% url 'view_requests' %}">View Requests</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            
+        </ul>
+    </nav>
+
+<ul>
+    {% for request in requests %} 
+        <li>
+            Tutor: <a href = "/user/{{request.tutor_username}}">{{request.tutor_username}}</a>
+            <br>
+            Time: {{request.time}}
+            <br>
+            Status: {{request.status}}
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>Tutor HomePage</title>
+        {% load account %}
+        {% load socialaccount %}
+    </head>
+    
+    <head>
+        <style>
+            body {
+                background-color: #b8d6e0; /* #ADD8E6 or #cceefd light blue */
+            }
+    
+            nav {
+                font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+                
+            }
+    
+            nav ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #2E3D51;
+                height: 80px; /* set the height of the navigation bar */
+                display: flex; /* use flexbox to center the text */
+                justify-content: center; /* horizontally center the text */
+            }
+    
+            nav li {
+                float: left; 
+            }
+    
+            nav li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 40px 20px;
+                text-decoration: none;
+                font-size: 20px;
+                line-height: 10px;
+            }
+    
+            nav li a:hover {
+                background-color: #111;
+            }
+            
+            @media screen and (max-width: 600px) {
+                nav li a {
+                    padding: 20px 8px;
+                }
+            }
+    
+            /*
+            nav {
+                width: 100%;
+            }
+            */
+    
+             h1 {
+                font-family: 'Helvetica Rounded', 'Arial Rounded MT Bold', sans-serif;
+                font-weight: bolder;
+                text-align: center;
+                font-size: 60px;
+            }
+    
+       
+            /* Style for even rows */
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+    
+            /* Style for odd rows */
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+    
+            /* Style for header row */
+            th {
+                background-color: #2E3D51;
+                color: white;
+            }
+    
+            /* Style for table cells */
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+        
+            
+    
+        </style>
+    
+        <title>TutorHomePage</title>
+    </head>
+    
+    <body>
+    
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'index' %}">Search For Classes</a></li>
+                <li><a href="{% url 'view_requests' %}">View Requests</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                
+            </ul>
+        </nav>
+    
+        <h1> Hoos Tutoring </h1>
+        
+        <div class="dashboard">
+
+              <div class="tutor-dashboard">
+                <h2>Welcome back tutor! <span style="font-size: 40px; line-height: 20px;">👋</span></h2>
+                <!--<h3 style="margin-top: 60px;">Available Tutorees:</h3>
+                <table>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                    </tr>
+                
+                      {% for tutoree in tutorees %}
+                        <tr>
+                          <td>{{ tutoree.username }}</td>
+                          <td>{{ tutoree.email }}</td>
+                        </tr>
+                      {% empty %}
+                        <tr>
+                          <td colspan="2">No tutorees found.</td>
+                        </tr>
+                      {% endfor %}
+                  </table>-->
+              </div>
+        </div>
+    
+        <div style="margin-top: 60px;"></div>
+    
+        <div class="account-email-StuVSTut">
+            <p><b><span class="account-title">Account Email:</span> </b>{{user.email}}</p>
+
+            <p><b><span class="account-title">Account Role:</span> </b>You are logged in as a tutor</p>
+        </div>
+    
+    </body>
+    </html>
+
