@@ -1,6 +1,6 @@
 # Tutor Me
 
-__Name:__
+__Name:__ Ellen Herrera
 
 __Computing ID:__
 
